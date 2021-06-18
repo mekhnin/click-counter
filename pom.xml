@@ -10,9 +10,9 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>click-counter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>click-counter</name>
-    <description>Demo project for Spring Boot</description>
+    <description>There is application for counting of button clicks</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -51,7 +51,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

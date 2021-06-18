@@ -2,6 +2,8 @@ package com.example.clickcounter.controller;
 
 import com.example.clickcounter.service.CountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,4 +28,9 @@ public class CountController {
         return countService.get().getValue();
     }
 
+    @MessageMapping("/add")
+    @SendTo("/topic/counter")
+    public long add(){
+        return countService.add();
+    }
 }

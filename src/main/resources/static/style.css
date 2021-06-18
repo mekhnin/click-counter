@@ -1,0 +1,15 @@
+div {
+    text-align: center;
+    font-size: 24px;
+}
+.button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 24px;
+    padding: 12px 12px;
+    border-radius: 12px;
+}
+
+.button:hover {
+    background-color: purple;
+}

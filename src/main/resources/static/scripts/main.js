@@ -6,6 +6,10 @@ function connect() {
 		stompClient.subscribe('/topic/counter', function(response) {
 			draw(response.body);
 		});
+		$.get("/count", function(response) {
+			draw(response);
+			$("div#button").html('<button onclick=\"add()\" class=\"button\">+1</button>');
+		});
 	});
 }
 
@@ -22,14 +26,7 @@ function add(){
 	stompClient.send("/app/add");
 }
 
-function init(){
-	connect();
-	$.get("/count", function(response) {
-		draw(response);
-	})
-}
-
-init()
+connect()
 $(window).on('unload', function(){
 	disconnect();
 })

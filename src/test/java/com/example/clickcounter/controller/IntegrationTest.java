@@ -11,7 +11,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,14 +44,26 @@ public class IntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string("0"));
-        assertEquals(1, service.add());
-        assertEquals(2, service.add());
+        Runnable task = () -> {
+            for (int i = 0; i < 1000; i++) {
+                service.add();
+                try {
+                    Thread.sleep((long) (Math.random() * 50));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        List<Thread> threads = new ArrayList<>();
+        Stream.generate(() -> new Thread(task)).limit(15).peek(threads::add).forEach(Thread::start);
+        for (Thread t : threads) {
+            t.join();
+        }
         mvc.perform(MockMvcRequestBuilders
                 .get("/count")
                 .characterEncoding("utf-8")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string("2"));
+                .andExpect(content().string("15000"));
     }
-
 }

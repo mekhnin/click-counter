@@ -26,6 +26,6 @@ jobs:
           DB_PASSWORD: secret
         run: docker-compose up -d
       - name: Endpoint test
-        env:
-          WAIT_HOSTS: click-counter:8080
-        run: docker run --network container:click-counter appropriate/curl --retry 10 --retry-connrefused http://localhost:8080/
+        run: |
+          sleep 30
+          docker run --network container:click-counter appropriate/curl --retry 10 --retry-connrefused http://localhost:8080/

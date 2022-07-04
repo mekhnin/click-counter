@@ -5,7 +5,6 @@ services:
     build:
       context: .
     container_name: click-counter
-    hostname: click-counter
     ports:
       - "8080:8080"
     depends_on:

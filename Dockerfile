@@ -1,7 +1,7 @@
 FROM openjdk:11
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
 ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
+ARG WORKDIR=/usr/click-counter/
+COPY ${JAR_FILE} ${WORKDIR}app.jar
+WORKDIR $WORKDIR
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar", "app.jar"]

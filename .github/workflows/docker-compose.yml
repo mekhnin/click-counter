@@ -20,10 +20,6 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Containerization with Docker Compose
-        env:
-          DB_NAME: counter
-          DB_USER: client
-          DB_PASSWORD: secret
         run: docker-compose up -d
       - name: Endpoint test
         run: |

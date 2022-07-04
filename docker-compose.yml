@@ -10,14 +10,14 @@ services:
     depends_on:
       - db
     environment:
-      DB_URL: jdbc:postgresql://db:5432/${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
+      DB_URL: jdbc:postgresql://db:5432/${DB_NAME:-counter}
+      DB_USER: ${DB_USER:-client}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
   db:
     image: postgres
     container_name: postgres
     restart: always
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-counter}
+      POSTGRES_USER: ${DB_USER:-client}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}

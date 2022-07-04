@@ -19,12 +19,7 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build with Docker Compose
+      - name: Containerization with Docker Compose
         env:
           DB_NAME: counter
           DB_USERNAME: client

@@ -1,5 +1,4 @@
 name: Docker Compose CI
-sudo: required
 
 on:
   push:
@@ -27,4 +26,4 @@ jobs:
           DB_PASSWORD: secret
         run: docker-compose up -d
       - name: Endpoint test
-        run: docker run --network=host appropriate/curl -s --retry 3 --retry-connrefused http://localhost:8080/
+        run: sudo docker run --network=host appropriate/curl -s --retry 3 --retry-connrefused http://localhost:8080/

@@ -24,6 +24,6 @@ jobs:
           DB_NAME: counter
           DB_USER: client
           DB_PASSWORD: secret
-        run: docker-compose up
+        run: docker-compose up -d
       - name: Endpoint test
-        run: docker run --network container:click-counter appropriate/curl -s --retry 3 --retry-connrefused http://localhost:8080/
+        run: docker run --network container:click-counter appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8080/

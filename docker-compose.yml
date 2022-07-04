@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  click-counter:
+    build:
+      context: .
+    container_name: click-counter
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/${DB_NAME:-counter}
+      DB_USER: ${DB_USER:-client}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+  db:
+    image: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME:-counter}
+      POSTGRES_USER: ${DB_USER:-client}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}

@@ -28,4 +28,4 @@ jobs:
       - name: Endpoint test
         run: |
           sleep 15
-          docker run --network=host http://localhost:8080/
+          docker run --network=host appropriate/curl -s http://localhost:8080/

@@ -27,5 +27,5 @@ jobs:
         run: docker-compose up -d
       - name: Endpoint test
         run: |
-          sleep 30
-          docker run --network container:click-counter appropriate/curl --retry 10 --retry-connrefused http://localhost:8080/
+          sleep 15
+          docker run --network=host http://localhost:8080/

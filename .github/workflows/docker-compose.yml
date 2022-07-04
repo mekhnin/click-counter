@@ -25,5 +25,5 @@ jobs:
           DB_USERNAME: client
           DB_PASSWORD: secret
         run: docker-compose up -d
-      - name: Test
-        run: docker run --network=host appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8080/
+      - name: Endpoint test
+        run: docker run --network container:click-counter appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8080/
